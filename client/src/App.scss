@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
+
+
+$primary-color : #299EF7;
+$secondary-color : #fafafa;
+
+* {
+    font-family: BlinkMacSystemFont, roboto;
+    margin: 0px;
+    padding: 0px;
+}
+
+body {
+   
+    background-color:#f0f2f5 !important;
+}
+
+// input{
+
+    
+      
+//         outline: none !important;
+//         box-shadow: none !important;
+//         border-color: none !important;
+        
+// }
+input:focus-visible{
+      
+    outline: none ;
+    box-shadow: none ;
+    border-color: none ;
+    }
+ 
+a,
+a::hover{
+
+    text-decoration: none;
+
+
+}
+
+
+li{
+    list-style: none;
+}
+
+ul{
+    padding-bottom: 0px;
+    padding-left: 0px;
+    margin-bottom: 0px;
+}
+
