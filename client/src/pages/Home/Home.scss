@@ -544,6 +544,16 @@ justify-content: center;
 
         width: 360px;
         margin-top: 25px;
+       display: flex;
+            
+
+        .log_out_btn{
+
+            text-decoration: none;
+            color: #050505;
+            font-weight: 500;
+            
+        }
     }
 
    }

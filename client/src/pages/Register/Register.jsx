@@ -1,10 +1,19 @@
+import axios from 'axios';
 import React from 'react';
 import { useState } from 'react';
 import './Register.scss';
-
+import swal from 'sweetalert';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { Link } from 'react-router-dom';
 
 const Register = () => {
  
+
+
+
+  //state for form fields
+
   const [ input , setInput ] = useState({
 
    name     : '',
@@ -20,12 +29,68 @@ const Register = () => {
 
   };
 
-  console.log(input);
+
+  const handleUserRegister = async (e) => {
+
+    e.preventDefault();
+
+    try {
+      
+      if( !input.name || !input.username || !input.email || !input.password ){
+
+
+        swal("Danger!", "All fields are required", "error");
+
+      }else {
+
+       await axios.post('http://localhost:5050/api/user/register' , input).then(res => {
+
+       setInput((prev) => ({
+
+        name : '',
+        email : '',
+        username : '',
+        password :''
+
+       }));
+
+       swal("Success!", "Your account created", "success");
+
+        });
+     
+      }
+
+    } catch (error) {
+
+      swal("Danger!", "Your account created fail", "error");
+
+      console.log(error);
+    }
+
+  }
+
+
 
 
   return (
 
     <div className="register-container">
+
+
+          <ToastContainer
+
+          position="top-center"
+          autoClose={2000}
+          hideProgressBar={true}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+
+          />
+
         <a href="#" className='register-logo-link'>
            <img className='register-logo' src="https://static.xx.fbcdn.net/rsrc.php/y8/r/dF5SId3UHWd.svg" alt="" />
         </a>
@@ -35,7 +100,7 @@ const Register = () => {
 
 
       
-        <form className='register-form' action="">
+        <form onSubmit={handleUserRegister} className='register-form' action="">
 
 
 
@@ -186,7 +251,7 @@ const Register = () => {
 
         <div className="register-forgotten-sign">
       
-      <a className='Already-account-btn' href="">Already have an account?</a>
+      <Link className='Already-account-btn' to="/login" href="">Already have an account?</Link>
       
 
       </div>

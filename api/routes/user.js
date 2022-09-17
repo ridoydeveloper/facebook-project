@@ -1,35 +1,31 @@
-
-
 import express from 'express';
-import { createUser, deleteUser, getAllUser, getSingleUser, updateUser, userLogin, userRegister } from '../controllers/userController.js';
-import { adminhMiddleware } from '../middlewares/adminMiddleware.js';
+import { createUser, deleteUser, getAllUser, getSingleUser, updateUser, userLogin, userRegister , getLogginUser , verifyUserAccount, recoverPassword, resetPassword } from '../controllers/userController.js';
+import { adminMiddleware } from '../middlewares/adminMiddleware.js';
 import { authMiddleware } from '../middlewares/authMiddleware.js';
 import { userMiddleware } from '../middlewares/userMiddleware.js';
 
 
 
-
-// init router
-
+// init router 
 const router = express.Router();
 
 
-// user auth route
-
+// user Auth Route 
 router.post('/login', userLogin);
 router.post('/register', userRegister);
-
-
-// route REST API
-
-
-router.route('/').get(adminhMiddleware, getAllUser).post(adminhMiddleware, createUser);
-router.route('/:id').get(userMiddleware, getSingleUser).delete(userMiddleware, deleteUser).put(userMiddleware, updateUser).patch(userMiddleware, updateUser);
+router.get('/me', getLogginUser);
+router.post('/verify', verifyUserAccount);
+router.post('/recover-password', recoverPassword);
+router.post('/reset-password', resetPassword);
 
 
 
 
+// route REST API 
+router.route('/').get(adminMiddleware , getAllUser).post(adminMiddleware, createUser);
+router.route('/:id').get(userMiddleware, getSingleUser).delete(userMiddleware, deleteUser).put(userMiddleware, updateUser).patch(userMiddleware, updateUser); 
 
-// export defult router
 
+
+// export default router 
 export default router;

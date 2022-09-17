@@ -1,9 +1,7 @@
-
 import mongoose from "mongoose";
 
 
 // create student schema
-
 const studentSchema = mongoose.Schema({
 
     name : {
@@ -31,12 +29,10 @@ const studentSchema = mongoose.Schema({
     },
     age : {
         type : Number,
-        required : true,
-       
+        required : true
     },
     gender : {
-        type : String,
-             
+        type : String
     },
     password : {
         type : String,
@@ -45,7 +41,6 @@ const studentSchema = mongoose.Schema({
     },
     photo : {
         type : String,
-        
     },
     isAdmin : {
         type : Boolean,
@@ -58,16 +53,14 @@ const studentSchema = mongoose.Schema({
     trash : {
         type : Boolean,
         default : false
-    },
+    }
 
 }, {
-
     timestamps : true
-
 });
 
 
 
-// export model
 
-export default mongoose.model('Student' , studentSchema);
+// export model 
+export default mongoose.model('Student', studentSchema);

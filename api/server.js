@@ -1,57 +1,45 @@
-import express from "express";
-import  colors from "colors";
+import express from 'express';
+import colors from 'colors';
 import dotenv from 'dotenv';
-import studentRouter  from './routes/student.js'
-import userRouter  from './routes/user.js'
-import mongoDBConnect from "./config/db.js";
-import errorHandler from "./middlewares/errorHandler.js";
-import cookieParser from "cookie-parser";
+import studentRoute from './routes/student.js';
+import userRoute from './routes/user.js'; 
+import mongoDBConnect from './config/db.js';
+import errorHandler from './middlewares/errorHandler.js';
+import cookieParser from 'cookie-parser';
+import cors from 'cors';
 
 
+ 
 
-
-
-// init express
-
+// init express 
 const app = express();
-
 dotenv.config();
 
 
 
 
-
-
-// middlewares
-
+// middlewares 
 app.use(express.json());
-app.use(express.urlencoded({ extended : false}));
-app.use(cookieParser())
+app.use(express.urlencoded({ extended : false }));
+app.use(cookieParser()); 
+app.use(cors());
 
-
-
-
+ 
 // init env variabels
-
 const PORT = process.env.SERVER_PORT || 5000;
 
-//routes
+
+// routes 
+app.use('/api/student' , studentRoute );
+app.use('/api/user' , userRoute );
 
 
-app.use('/api/student', studentRouter);
-app.use('/api/user', userRouter);
 
-
-// express error handler
-
+// express error handler 
 app.use( errorHandler );
 
-
-// listen server
-
-app.listen(PORT , () => {
-
+// listen server 
+app.listen(PORT, () => {
     mongoDBConnect();
-
     console.log(`server running on port ${ PORT }`.bgGreen.black);
 });
